@@ -43,7 +43,7 @@ module.exports = function (controller) {
     // Menu option 1 - Make announcement)
     convo.addMessage({
         text: 'To start making an announcement, enter the email of the Webex user below to select a recipient of your announcement!\n\n',
-        action: 'default'
+        action: 'recipient_info'
     }, 'menu_1');
 
     // adding next action
