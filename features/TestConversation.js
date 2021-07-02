@@ -60,8 +60,7 @@ module.exports = function (controller) {
         {
             pattern: 'yes',
             handler: async (response, convo, bot) => {
-                bot.say( 'Confirmed!\n' );
-                return await convo.gotoThread( 'get_announcement' );
+                return await convo.gotoThread( 'get_message' );
             }
         },
         {
