@@ -89,11 +89,11 @@ module.exports = function (controller) {
 
     controller.addDialog( convo );
 
-    controller.hears( 'loop', 'message,direct_message', async ( bot, message ) => {
+    controller.hears( 'announcements', 'message,direct_message', async ( bot, message ) => {
 
-        await bot.beginDialog( 'loop_chat' );
+        await bot.beginDialog( 'test_command_chat' );
     });
 
-    controller.commandHelp.push( { command: 'loop', text: 'Example of a conversation that loops until explicitly stopped' } );
+    controller.commandHelp.push( { command: 'announcements', text: 'Start announcement service' } );
 
 };
