@@ -61,6 +61,7 @@ module.exports = function (controller) {
             pattern: 'yes',
             handler: async (response, convo, bot) => {
                 await bot.say( 'Confirmed!\n' );
+                return await convo.gotoThread( 'get_announcement' );
             }
         },
         {
@@ -70,6 +71,42 @@ module.exports = function (controller) {
             }
         }
     ], {key: 'send_to_email'}, 'recipient_info');
+
+    // adding next action
+    convo.addAction('get_message');
+
+    convo.addQuestion('Great! Now enter your message below or "cancel" to stop this service!\n', [
+        {
+            pattern: 'cancel',
+            handler: async (response, convo, bot) => {
+                await bot.say( 'Okay cancelling announcement! Thanks for visiting!\n' );
+                return await convo.gotoThread( 'default' );
+            }
+        },
+        {
+            default: true,
+            handler: async (response, convo, bot) => {
+                return await convo.gotoThread( 'get_message' );
+            }
+        }
+    ], {key: 'send_this_message'}, 'get_message');
+
+    convo.addQuestion('Message received! Send it now? "yes" to send or "cancel" to stop this service!\n', [
+        {
+            pattern: 'yes',
+            handler: async (response, convo, bot) => {
+                await bot.say( 'Sending your message to {{vars.send_to_email}}!\n' );
+            }
+        },
+        {
+            default: true,
+            handler: async (response, convo, bot) => {
+                await bot.say( 'Okay cancelling announcement! Thanks for visiting!\n' );
+                return await convo.gotoThread( 'default' );
+            }
+        }
+    ], {key: 'send_confirmation'}, 'get_message');
+
 
 
     // Menu option 2)
