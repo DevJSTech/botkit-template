@@ -60,7 +60,7 @@ module.exports = function (controller) {
         {
             pattern: 'yes',
             handler: async (response, convo, bot) => {
-                await bot.say( 'Confirmed!\n' );
+                bot.say( 'Confirmed!\n' );
                 return await convo.gotoThread( 'get_announcement' );
             }
         },
@@ -79,7 +79,7 @@ module.exports = function (controller) {
         {
             pattern: 'cancel',
             handler: async (response, convo, bot) => {
-                await bot.say( 'Okay cancelling announcement! Thanks for visiting!\n' );
+                bot.say( 'Okay cancelling announcement! Thanks for visiting!\n' );
                 return await convo.gotoThread( 'default' );
             }
         },
