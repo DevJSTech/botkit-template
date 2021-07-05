@@ -93,12 +93,12 @@ module.exports = function (controller) {
         {
             pattern: 'yes',
             handler: async (response, convo, bot) => {
-                bot.say( 'Sending your message to '+ vars.send_to_email.toString() + '!\n' );
-                const python = exec('python', ['send_message.py', vars.send_to_email.toString()], function (err, stdout, stderr) {
+                await bot.say( 'Sending your message to {{vars.send_to_email}}!\n' );
+                const python = exec('python', ['send_message.py', '{{vars.send_to_email}}'], function (err, stdout, stderr) {
                     if (err) {
                         bot.say('I had some issues accessing the send script! Here is the log -\n');
                         bot.say('Error code - ' + err.code);
-                        bot.say('Signa received - ' + err.signal);
+                        bot.say('Signal received - ' + err.signal);
                     }
 
                     bot.say('Script ran successfully! Here are the logs - \n');
