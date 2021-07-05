@@ -53,13 +53,11 @@ module.exports = function (controller) {
     convo.addQuestion('Announcement Target?\n', [
         {
             default: true,
-            handler: async (response, convo, bot) => {
-                const send_to_email = response;
-            }
+            handler: async (response, convo, bot) => {}
         }
-    ], 'recipient_info');
+    ], {key: 'send_to_email'}, 'recipient_info');
 
-    convo.addQuestion('Selected user {{send_to_email}}. Enter "yes" to confirm or "no" to enter again\n', [
+    convo.addQuestion('Selected user {{vars.send_to_email}}. Enter "yes" to confirm or "no" to enter again\n', [
         {
             pattern: 'yes',
             handler: async (response, convo, bot) => {
@@ -91,7 +89,7 @@ module.exports = function (controller) {
         }
     ], {key: 'send_this_message'}, 'get_message');
 
-    convo.addQuestion('Message received! Send it now? "yes" to send or "cancel" to stop this service!\n', [
+    convo.addQuestion('Message received! Here is your message - \n {{vars.send_this_message}} \n\nSend it now? "yes" to send or "cancel" to stop this service!\n', [
         {
             pattern: 'yes',
             handler: async (response, convo, bot) => {
