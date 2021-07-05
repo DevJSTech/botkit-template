@@ -143,6 +143,6 @@ module.exports = function (controller) {
         await bot.beginDialog( 'test_command_chat' );
     });
 
-    controller.commandHelp.push( { command: 'announce', text: 'Start announcement service' } );
+    controller.commandHelp.push( { command: 'announcements', text: 'Start announcement service' } );
 
 };
