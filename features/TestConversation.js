@@ -85,9 +85,7 @@ module.exports = function (controller) {
         },
         {
             default: true,
-            handler: async (response, convo, bot) => {
-                return await convo.gotoThread( 'get_message' );
-            }
+            handler: async (response, convo, bot) => {}
         }
     ], {key: 'send_this_message'}, 'get_message');
 
