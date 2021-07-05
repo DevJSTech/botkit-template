@@ -70,7 +70,7 @@ module.exports = function (controller) {
                 return await convo.gotoThread( 'recipient_info' );
             }
         }
-    ], {key: 'send_to_email'}, 'recipient_info');
+    ], 'recipient_info');
 
     // adding next action
     convo.addAction('get_message');
@@ -117,7 +117,7 @@ module.exports = function (controller) {
                 return await convo.gotoThread( 'default' );
             }
         }
-    ], {key: 'send_confirmation'}, 'get_message');
+    ], 'get_message');
 
 
 
@@ -143,6 +143,6 @@ module.exports = function (controller) {
         await bot.beginDialog( 'test_command_chat' );
     });
 
-    controller.commandHelp.push( { command: 'announcements', text: 'Start announcement service' } );
+    controller.commandHelp.push( { command: 'announce', text: 'Start announcement service' } );
 
 };
