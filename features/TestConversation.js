@@ -5,6 +5,7 @@
 //
 
 const { BotkitConversation } = require( 'botkit' );
+const { exec } = require('child_process');
 
 module.exports = function (controller) {
 
@@ -94,7 +95,21 @@ module.exports = function (controller) {
         {
             pattern: 'yes',
             handler: async (response, convo, bot) => {
-                await bot.say( 'Sending your message to {{vars.send_to_email}}!\n' );
+                bot.say( 'Sending your message to {{vars.send_to_email}}!\n' );
+                const python = exec('python', ['send_message.py', vars.send_to_email.toString()], function (err, stdout, stderr) {
+                    if (err) {
+                        bot.say('I had some issues accessing the send script! Here is the log -\n');
+                        bot.say('Error code - ' + err.code);
+                        bot.say('Signa received - ' + err.signal);
+                    }
+
+                    bot.say('Script ran successfully! Here are the logs - \n');
+                    bot.say(stdout);
+                });
+
+                python.on('exit', function(code) {
+                    bot.say('Script exited with exit code - ' + code);
+                });
             }
         },
         {
